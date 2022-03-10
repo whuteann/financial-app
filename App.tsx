@@ -1,20 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { TailwindProvider } from 'tailwind-rn';
+import utilities from './tailwind.json';
+import RootNavigation from './src/navigation/RootNavigation';
+
+const tailwindExtensions = {
+  "box-card-shadow": {
+    style: {
+      shadowColor: 'black',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.2,
+      shadowRadius: 8,
+      borderRadius: 10,
+      borderWidth: 0,
+      elevation: 3,
+    }
+  },
+  "elevation-5": {
+    style: {
+      elevation: 5,
+    },
+  }
+}
 
 export default function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <TailwindProvider utilities={{...utilities, ...tailwindExtensions}}>
+      <RootNavigation />
+    </TailwindProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
