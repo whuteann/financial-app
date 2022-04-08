@@ -13,10 +13,11 @@ interface Props {
   password?: boolean,
   hasError?: boolean
   errorMessage?: string,
+  editable?: boolean,
 }
 
 const FormTextInput: React.FC<Props> = ({
-  title, placeholder = "", onChangeValue = () => { }, value = "", number = false, password = false, hasError = false, errorMessage = ""
+  title, placeholder = "", onChangeValue = () => { }, value = "", number = false, password = false, hasError = false, errorMessage = "", editable = true
 }) => {
   const tailwind = useTailwind();
 
@@ -31,6 +32,7 @@ const FormTextInput: React.FC<Props> = ({
         password={password}
         hasError={hasError}
         errorMessage={errorMessage}
+        editable={editable}
       />
     </View>
   );

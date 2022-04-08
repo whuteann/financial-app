@@ -11,22 +11,24 @@ interface inputProps {
   number?: boolean,
   password?: boolean,
   onChangeValue?: (value: string) => void;
+  editable?: boolean
 }
 
 const TextInputField: React.FC<inputProps> = ({
-  placeholder, hasError = false, errorMessage = "Error", onChangeValue = () => { }, value = "", number = false, password = false
+  placeholder, hasError = false, errorMessage = "Error", onChangeValue = () => { }, value = "", number = false, password = false, editable = true
 }) => {
 
   const tailwind = useTailwind();
 
   return (
     <View style={tailwind(`mb-3`)}>
-      <View style={tailwind(`box-card-shadow bg-white h-12 pt-[10px] px-3 mb-1 ${hasError ? "border border-red-500" : ""}`)}>
+      <View style={tailwind(`box-card-shadow ${editable ? "bg-white": ""}  h-12 pt-[10px] px-3 mb-1 ${hasError ? "border border-red-500" : ""}`)}>
         <TextInput
           placeholder={placeholder}
+          editable={editable}
           secureTextEntry={password}
           value={value}
-          style={tailwind("font-sans text-14px")}
+          style={tailwind(`font-sans text-14px ${editable ? "" : "text-gray-primary"}`)}
           onChangeText={(val) => {
             number
               ?

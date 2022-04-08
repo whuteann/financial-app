@@ -5,6 +5,7 @@ import RootNavigation from './src/navigation/RootNavigation';
 import { Provider } from 'react-redux';
 import store from './src/redux/Store';
 import UserProvider from './src/providers/UserProvider';
+import FirebaseProvider from './src/providers/FirebaseProvider';
 
 
 const tailwindExtensions = {
@@ -30,11 +31,13 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <UserProvider>
-        <TailwindProvider utilities={{ ...utilities, ...tailwindExtensions }}>
-          <RootNavigation />
-        </TailwindProvider>
-      </UserProvider>
+      <FirebaseProvider>
+        <UserProvider>
+          <TailwindProvider utilities={{ ...utilities, ...tailwindExtensions }}>
+            <RootNavigation />
+          </TailwindProvider>
+        </UserProvider>
+      </FirebaseProvider>
     </Provider>
   );
 }
