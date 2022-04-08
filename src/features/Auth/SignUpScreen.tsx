@@ -12,9 +12,10 @@ import RegularButton from "../../components/atoms/buttons/RegularButton";
 import LinkText from "../../components/atoms/typography/LinkText";
 import FormDropdownInput from "../../components/molecules/input/FormDropdownInput";
 import { CURRENCIES } from "../../constants/Lists";
+import { createUser } from "../../services/UserServices";
 
 const signUpSchema = Yup.object().shape({
-  name: Yup.string().required("Required"),
+  name: Yup.string().min(4, "Must be at least 4 characters").required("Required"),
   currency: Yup.string().required("Required"),
   email: Yup.string().email("Please enter a valid email address ").required("Required"),
   password: Yup.string().min(6, "Must be at least 6 characters").required("Required")
@@ -24,10 +25,22 @@ const SignUpScreen = ({ navigation }: AuthNavigationProps<"SignUp">) => {
 
   const tailwind = useTailwind();
   const { height } = getWindow();
+  const [error, setError] = useState("");
 
-  const onSignUp = (values: { email: string, password: string }) => {
-    console.log(values);
-    navigation.navigate("Login");
+  const onSignUp = (values: { name: string, email: string, password: string, currency: string }) => {
+    createUser(values, () => {
+      //handle buth Auth state
+    }, (err: any) => {
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          setError("Someone has already take this email :'(");
+          break;
+        default:
+          setError("Something happened and we don't know what :'(");
+          break;
+      }
+    });
+
   }
 
   return (
@@ -46,7 +59,7 @@ const SignUpScreen = ({ navigation }: AuthNavigationProps<"SignUp">) => {
           <Formik
             initialValues={{
               name: '',
-              currency: '',
+              currency: CURRENCIES[0],
               email: '',
               password: '',
             }}
@@ -88,7 +101,13 @@ const SignUpScreen = ({ navigation }: AuthNavigationProps<"SignUp">) => {
                   hasError={errors.password && touched.password ? true : false}
                   errorMessage={errors.password}
                 />
-
+                {
+                  error
+                    ?
+                    <TextLabel text={error} textStyle={tailwind("text-red-500")} />
+                    :
+                    null
+                }
                 <View style={tailwind("mt-10")} />
                 <RegularButton label="SignUp" onPress={() => { handleSubmit() }} />
 

@@ -1,21 +1,30 @@
 import moment from "moment";
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
+import { useSelector } from "react-redux";
 import { useTailwind } from "tailwind-rn/dist";
 import RegularButton from "../../components/atoms/buttons/RegularButton";
 import Body from "../../components/atoms/display/Body";
 import Section from "../../components/atoms/display/Section";
+
 import TextInputField from "../../components/atoms/input/TextInputField";
 import TextLabel from "../../components/atoms/typography/TextLabel";
-import SpendingsSection from "../../components/templates/dashboard/RecentSpendingsSection";
+import RecentSpendingsSection from "../../components/templates/dashboard/RecentSpendingsSection";
 import { numToMonth } from "../../helpers/Generichelper";
+import { UserSelector } from "../../redux/reducers/Auth";
+import LoadingScreen from "../Loading";
+
 
 const Dashboard = () => {
 
   const tailwind = useTailwind();
+  const user = useSelector(UserSelector);
   const [greetingMsg, setGreetingMsg] = useState<string>();
-  let name = "Celine Tioh";
-
+  
+  if (!user) { <LoadingScreen /> }
+  
+  let name = user?.name;
+  
   useEffect(() => {
     let currentHour = moment().toDate().getHours();
     if (currentHour < 12) {
@@ -50,7 +59,7 @@ const Dashboard = () => {
 
       <Section>
         <View>
-          <SpendingsSection />
+          <RecentSpendingsSection />
         </View>
       </Section>
 

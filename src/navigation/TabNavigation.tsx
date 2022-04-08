@@ -26,7 +26,6 @@ const TabNavigation = () => {
     >
       <Tab.Screen name="Dashboard" component={Dashboard} options={{
         tabBarIcon: ({ focused }) => (
-
           <BottomTab label='Dashboard' icon={<HomeIcon height={20} width={20} />} />
         )
       }} />
