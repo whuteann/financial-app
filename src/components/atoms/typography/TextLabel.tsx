@@ -5,11 +5,12 @@ import { useTailwind } from "tailwind-rn/dist";
 interface labelProps {
   text: string,
   textStyle?: any,
-  bodyStyle?: any
+  bodyStyle?: any,
+  color?: string,
 }
 
 const TextLabel: React.FC<labelProps> = ({
-  text, textStyle = null, bodyStyle = null
+  text, textStyle = null, bodyStyle = null, color = ""
 }) => {
 
   const tailwind = useTailwind();
@@ -22,7 +23,7 @@ const TextLabel: React.FC<labelProps> = ({
       ]}>
       <Text
         style={[
-          tailwind("text-14px text-primary font-sans"),
+          tailwind(`text-14px text-primary ${color} font-sans`),
           textStyle
         ]}
       >

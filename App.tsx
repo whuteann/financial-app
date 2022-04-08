@@ -2,6 +2,9 @@
 import { TailwindProvider } from 'tailwind-rn';
 import utilities from './tailwind.json';
 import RootNavigation from './src/navigation/RootNavigation';
+import store from './src/redux/store';
+import { Provider } from 'react-redux';
+import AuthNavigation from './src/navigation/AuthNavigation';
 
 const tailwindExtensions = {
   "box-card-shadow": {
@@ -25,9 +28,11 @@ const tailwindExtensions = {
 export default function App() {
 
   return (
-    <TailwindProvider utilities={{...utilities, ...tailwindExtensions}}>
-      <RootNavigation />
-    </TailwindProvider>
+    <Provider store={store}>
+      <TailwindProvider utilities={{ ...utilities, ...tailwindExtensions }}>
+        <RootNavigation />
+      </TailwindProvider>
+    </Provider>
   );
 }
 

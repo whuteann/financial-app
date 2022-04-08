@@ -6,28 +6,40 @@ import TextLabel from "../typography/TextLabel";
 interface inputProps {
   placeholder: string,
   value?: string,
-  hasError?: string,
+  hasError?: boolean,
   errorMessage?: string,
+  number?: boolean,
+  password?: boolean,
+  onChangeValue?: (value: string) => void;
 }
 
 const TextInputField: React.FC<inputProps> = ({
-  placeholder, hasError = false, errorMessage = "Error"
+  placeholder, hasError = false, errorMessage = "Error", onChangeValue = () => { }, value = "", number = false, password = false
 }) => {
 
   const tailwind = useTailwind();
 
   return (
-    <View style={tailwind("mb-3")}>
-      <View style={tailwind("box-card-shadow bg-white h-12 py-2 px-3 mb-1")}>
+    <View style={tailwind(`mb-3`)}>
+      <View style={tailwind(`box-card-shadow bg-white h-12 pt-[10px] px-3 mb-1 ${hasError ? "border border-red-500" : ""}`)}>
         <TextInput
           placeholder={placeholder}
-          style={tailwind("font-sans text-18px")}
+          secureTextEntry={password}
+          value={value}
+          style={tailwind("font-sans text-14px")}
+          onChangeText={(val) => {
+            number
+              ?
+              onChangeValue(val.replace(/[^0-9, .]/g, ''))
+              :
+              onChangeValue(val);
+          }}
         />
       </View>
       {
         hasError
           ?
-          <TextLabel text={errorMessage} textStyle={tailwind("text-red-500 ml-2")}/>
+          <TextLabel text={errorMessage} textStyle={tailwind("text-red-500 ml-2")} />
           :
           null
       }
