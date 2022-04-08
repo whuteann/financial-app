@@ -15,7 +15,7 @@ interface Props {
 }
 
 const FormDropdownInput: React.FC<Props> = ({
-  title, placeholder = "", items, onChangeValue = () => { }, value = "", hasError = false, errorMessage = ""
+  title, placeholder = "", items, onChangeValue = () => { }, value = "Select", hasError = false, errorMessage = ""
 }) => {
   const tailwind = useTailwind();
 

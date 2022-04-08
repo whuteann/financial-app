@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import RegularButton from "../../components/atoms/buttons/RegularButton";
@@ -10,6 +10,7 @@ import { getWindow } from "../../helpers/Generichelper";
 import { AuthNavigationProps } from "../../navigation/NavigationProps/NavigationProps";
 import * as Yup from "yup";
 import LinkText from "../../components/atoms/typography/LinkText";
+import { login } from "../../services/AuthServices";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Please enter a valid email address ").required("Required"),
@@ -20,10 +21,25 @@ const LoginScreen = ({ navigation }: AuthNavigationProps<"Login">) => {
 
   const tailwind = useTailwind();
   const { height } = getWindow();
+  const [error, setError] = useState("");
 
   const onLogin = (values: { email: string, password: string }) => {
-    console.log(values);
-    navigation.navigate("Tabs");
+    const { email, password } = values;
+    login(email, password, () => {
+      //handle buth Auth state
+    }, (err: any) => {
+      switch (err.code) {
+        case "auth/wrong-password":
+          setError("Wrong username or password :'(");
+          break;
+        case "auth/user-not-found":
+          setError("User not found :0 please sign up!");
+          break;
+        default:
+          setError("Something went wrong :(");
+          break;
+      }
+    })
   }
 
   return (
@@ -66,7 +82,13 @@ const LoginScreen = ({ navigation }: AuthNavigationProps<"Login">) => {
                   hasError={errors.password && touched.password ? true : false}
                   errorMessage={errors.password}
                 />
-
+                {
+                  error
+                    ?
+                    <TextLabel text={error} textStyle={tailwind("text-red-500")} />
+                    :
+                    null
+                }
                 <View style={tailwind("mt-10")} />
                 <RegularButton label="Login!" onPress={() => { handleSubmit() }} />
 
