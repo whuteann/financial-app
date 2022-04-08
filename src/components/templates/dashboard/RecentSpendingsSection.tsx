@@ -6,13 +6,13 @@ import TextLabel from "../../atoms/typography/TextLabel";
 import SpendingCard from "../../molecules/display/SpendingCard";
 
 
-const SpendingsSection = () => {
+const RecentSpendingsSection = () => {
 
   const tailwind = useTailwind();
 
   return (
     <View>
-      <TextLabel text="Spendings March:" textStyle={tailwind("text-20px font-bold")} />
+      <TextLabel text="Recent Spendings:" textStyle={tailwind("text-20px font-bold")} />
       <View style={tailwind("mt-3")}>
         <SpendingCard amountSpent="10.00" description="Lunch with family" />
         <SpendingCard amountSpent="115.00" description="Groceries" />
@@ -22,4 +22,4 @@ const SpendingsSection = () => {
   )
 }
 
-export default SpendingsSection;
+export default RecentSpendingsSection;

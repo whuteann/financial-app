@@ -1,0 +1,24 @@
+import React, { useState } from "react";
+import { View } from "react-native";
+import { useTailwind } from "tailwind-rn/dist";
+import Body from "../../components/atoms/display/Body";
+import Section from "../../components/atoms/display/Section";
+import TextLabel from "../../components/atoms/typography/TextLabel";
+
+
+const MonthIndexScreen = () => {
+
+  const tailwind = useTailwind();
+
+  return (
+    <Body>
+      <Section>
+        <TextLabel text={`Pick a month, and we will show you your spendings!`} textStyle={tailwind("text-20px font-bold")} />
+        <View style={tailwind("border mb-5 mt-2")} />
+
+      </Section>
+    </Body>
+  )
+}
+
+export default MonthIndexScreen;

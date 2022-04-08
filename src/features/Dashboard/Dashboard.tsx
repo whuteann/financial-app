@@ -4,10 +4,11 @@ import { Text, View } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import RegularButton from "../../components/atoms/buttons/RegularButton";
 import Body from "../../components/atoms/display/Body";
+import Section from "../../components/atoms/display/Section";
 import TextInputField from "../../components/atoms/input/TextInputField";
 import TextLabel from "../../components/atoms/typography/TextLabel";
-import SpendingCard from "../../components/molecules/display/SpendingCard";
-import SpendingsSection from "../../components/templates/dashboard/SpendingsSection";
+import SpendingsSection from "../../components/templates/dashboard/RecentSpendingsSection";
+import { numToMonth } from "../../helpers/Generichelper";
 
 const Dashboard = () => {
 
@@ -28,7 +29,7 @@ const Dashboard = () => {
 
   return (
     <Body>
-      <View>
+      <Section>
         <TextLabel text={`${greetingMsg}, ${name}`} textStyle={tailwind("text-20px font-bold")} />
         <TextLabel text={`What did you spend on? How much?`} />
 
@@ -38,12 +39,23 @@ const Dashboard = () => {
         </View>
 
         <RegularButton label="Add!" />
-        
-        <View style={tailwind("mt-10")}>
+      </Section>
+
+      <Section bgColor="bg-primary" padding="py-4" margin="my-4">
+        <View>
+          <TextLabel text={`This month's total (${numToMonth(moment().toDate().getMonth())}): `} color={"text-secondary"} textStyle={tailwind("text-20px font-bold")} />
+          <TextLabel text={`RM 1234.00`} color={"text-secondary"} textStyle={tailwind("text-20px font-bold")} />
+        </View>
+      </Section>
+
+      <Section>
+        <View>
           <SpendingsSection />
         </View>
+      </Section>
 
-      </View>
+
+
     </Body>
   )
 }
