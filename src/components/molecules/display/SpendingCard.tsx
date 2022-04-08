@@ -8,11 +8,11 @@ interface cardProps {
   amountSpent: string,
   description: string,
   currencyRate?: string,
-  threshold?: "low" | "high" | "neutral",
+  threshold?: "low" | "high" | "good",
 }
 
 const SpendingCard: React.FC<cardProps> = ({
-  amountSpent, description, threshold = "neutral", currencyRate = CURRENCIES[0]
+  amountSpent, description, threshold = "good", currencyRate = CURRENCIES[0]
 }) => {
   const tailwind = useTailwind();
   const [textColor, setTextColor] = useState("");
@@ -25,8 +25,8 @@ const SpendingCard: React.FC<cardProps> = ({
       case "low":
         setTextColor("text-yellow-500");
         break;
-      case "neutral":
-        setTextColor("");
+      case "good":
+        setTextColor("text-green-500");
         break;
     }
   });
