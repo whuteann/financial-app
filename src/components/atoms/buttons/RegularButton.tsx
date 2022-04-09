@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import TextLabel from "../typography/TextLabel";
 
@@ -7,10 +7,11 @@ interface buttonProps {
   label: string,
   onPress?: () => void,
   variant?: "Primary" | "Secondary" | "Disabled",
+  loading?: boolean,
 }
 
 const RegularButton: React.FC<buttonProps> = ({
-  label, onPress = () => { }, variant = "Primary"
+  label, onPress = () => { }, variant = "Primary", loading = false
 }) => {
 
   const tailwind = useTailwind();
@@ -35,9 +36,17 @@ const RegularButton: React.FC<buttonProps> = ({
 
   return (
     <View style={tailwind("w-full")}>
-      <TouchableOpacity onPress={onPress}>
-        {buttonBody}
-      </TouchableOpacity>
+      {
+        loading
+          ?
+          <View style={tailwind("bg-highlight w-full h-12 pt-[10px] items-center rounded-xl mb-3")}>
+            <ActivityIndicator size={25} color={"white"} />
+          </View>
+          :
+          <TouchableOpacity onPress={onPress}>
+            {buttonBody}
+          </TouchableOpacity>
+      }
     </View>
   )
 }

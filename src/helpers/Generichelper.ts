@@ -1,4 +1,5 @@
 import { Dimensions } from "react-native";
+import { thresholds } from "../components/molecules/display/SpendingCard";
 
 export const numToMonth = (num: number) => {
   switch (num) {
@@ -27,6 +28,36 @@ export const numToMonth = (num: number) => {
     case 11:
       return "December";
   }
+}
+
+export const numToDay = (num: number) => {
+  switch (num) {
+    case 1:
+      return "Monday";
+    case 2:
+      return "Tuesday";
+    case 3:
+      return "Wednesday";
+    case 4:
+      return "Thursdat";
+    case 5:
+      return "Friday";
+    case 6:
+      return "Saturday";
+    case 0:
+      return "Sunday";
+  }
+}
+
+export const getThresholdValue = (value: number, caution: number, danger: number) => {
+  let threshold: thresholds = "good";
+  if (value >= danger) {
+    threshold = "danger";
+  } else if (value >= caution) {
+    threshold = "caution";
+  }
+
+  return threshold
 }
 
 export const getWindow = () => {

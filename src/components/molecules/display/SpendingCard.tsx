@@ -4,25 +4,29 @@ import { useTailwind } from "tailwind-rn/dist";
 import { CURRENCIES } from "../../../constants/Lists";
 import TextLabel from "../../atoms/typography/TextLabel";
 
+export type thresholds = "caution" | "danger" | "good";
+
 interface cardProps {
-  amountSpent: string,
+  amountSpent: number,
   description: string,
   currencyRate?: string,
-  threshold?: "low" | "high" | "good",
+  threshold?: "caution" | "danger" | "good",
+  created_date?: string,
+  created_day?: string,
 }
 
 const SpendingCard: React.FC<cardProps> = ({
-  amountSpent, description, threshold = "good", currencyRate = CURRENCIES[0]
+  amountSpent, description, threshold = "good", currencyRate = CURRENCIES[0], created_date = "", created_day = ""
 }) => {
   const tailwind = useTailwind();
   const [textColor, setTextColor] = useState("");
 
   useEffect(() => {
     switch (threshold) {
-      case "high":
+      case "danger":
         setTextColor("text-red-500");
         break;
-      case "low":
+      case "caution":
         setTextColor("text-yellow-500");
         break;
       case "good":
@@ -32,9 +36,15 @@ const SpendingCard: React.FC<cardProps> = ({
   });
 
   return (
-    <View style={tailwind("box-card-shadow bg-white h-16 px-4 py-2 mb-3")}>
-      <TextLabel text={`${currencyRate} ${amountSpent}`} textStyle={tailwind(`text-16px font-bold mb-0 ${textColor}`)} bodyStyle={tailwind("mb-0")} />
-      <TextLabel text={description} />
+    <View style={tailwind("box-card-shadow bg-white px-4 py-2 mb-3 flex-row")}>
+      <View style={tailwind("w-[70%]")}>
+        <TextLabel text={`${currencyRate} ${amountSpent}`} textStyle={tailwind(`text-16px font-bold mb-0 ${textColor}`)} bodyStyle={tailwind("mb-0")} />
+        <TextLabel text={description} />
+      </View>
+      <View style={tailwind("w-[30%]")}>
+        <TextLabel text={`${created_date}`} textStyle={tailwind(`mb-0`)} bodyStyle={tailwind("mb-0")} />
+        <TextLabel text={created_day} />
+      </View>
     </View>
   )
 }
