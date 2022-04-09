@@ -34,7 +34,6 @@ const RecentSpendingsSection = () => {
   })
 
   if (!month || !tabs || !user) return <LoadingSectionScreen />
-
   return (
     <View>
       <TextLabel text="Recent Spendings:" textStyle={tailwind("text-20px font-bold")} />
@@ -43,6 +42,8 @@ const RecentSpendingsSection = () => {
           tabs.map(item => {
             return <SpendingCard
               key={item.id}
+              tabID={item.id}
+              collectionID={month[0].id}
               currencyRate={user.currency}
               description={item.description}
               amountSpent={item.amount}

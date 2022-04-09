@@ -15,10 +15,10 @@ const MonthIndexScreen = () => {
   return (
     <Body>
       <Section>
-        <TextLabel text={`Pick a month, and we will show you your spendings!`} textStyle={tailwind("text-20px font-bold")} />
+        {/* <TextLabel text={`Pick a month, and we will show you your spendings!`} textStyle={tailwind("text-20px font-bold")} />
         <View style={tailwind("border mb-5 mt-2")} />
 
-        <MonthCard month="April" year="2022" total="1000" currencyRate="RM"/>
+        <MonthCard month="April" year="2022" total="1000" currencyRate="RM"/> */}
 
       </Section>
     </Body>
