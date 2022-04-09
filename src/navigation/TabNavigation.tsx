@@ -37,7 +37,7 @@ const TabNavigation = () => {
 
       <Tab.Screen name="Month" component={MonthIndexScreen} options={{
         tabBarIcon: ({ focused }) => (
-          <BottomTab label='Months' icon={<CalendarIcon height={20} width={20} />} />
+          <BottomTab label='Summary' icon={<CalendarIcon height={20} width={20} />} />
         )
       }} />
     </Tab.Navigator>

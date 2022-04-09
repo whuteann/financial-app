@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import { CAUTION_SPENDING_EXAMPLES, DANGER_SPENDING_EXAMPLES, GOOD_SPENDING_EXAMPLES } from "../../../constants/Lists";
 import TextLabel from "../../atoms/typography/TextLabel";
-import SpendingCard from "../../molecules/display/SpendingCard";
+import SpendingCardExample from "../../molecules/display/SpendingCardExample";
 
 interface props {
   lowValue: string,
@@ -30,19 +30,19 @@ const SpendingCardExamples: React.FC<props> = ({
   return (
     <View>
       <TextLabel text={"Example"} textStyle={tailwind("font-bold")} />
-      <SpendingCard
+      <SpendingCardExample
         amountSpent={lowValue ? Number(lowValue) - 1 : 0}
         currencyRate={currency}
         description={goodExample}
         threshold="good"
       />
-      <SpendingCard
+      <SpendingCardExample
         amountSpent={lowValue ? Number(lowValue) : 0}
         currencyRate={currency}
         description={cautionExample}
         threshold="caution"
       />
-      <SpendingCard
+      <SpendingCardExample
         amountSpent={highValue ? Number(highValue) : 0}
         currencyRate={currency}
         description={dangerExample}

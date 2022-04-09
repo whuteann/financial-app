@@ -37,7 +37,7 @@ const Dashboard = () => {
   }, [])
 
   return (
-    <Body>
+    <Body height="280%">
       <Section>
         <TextLabel text={`${greetingMsg},`} textStyle={tailwind("text-20px font-bold")} />
         <TextLabel text={`${name}!`} textStyle={tailwind("text-20px font-bold")} />

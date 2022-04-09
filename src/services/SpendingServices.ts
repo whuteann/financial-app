@@ -31,7 +31,7 @@ export const checkMonthExist = (uid: string, month: string, year: number, ifExis
     })
 }
 
-export const createSpendingTab = (uid: string, data: { amount: string, description: string }, onSucess: (docID:string) => void, onError: (error: string) => void) => {
+export const createSpendingTab = (uid: string, data: { amount: string, description: string }, onSucess: (docID: string) => void, onError: (error: string) => void) => {
   const { amount, description } = data;
 
   checkMonthExist(
@@ -75,4 +75,12 @@ export const createSpendingTab = (uid: string, data: { amount: string, descripti
     })
 }
 
+export const deleteSpendingCard = (collectionID: string, tabID: string, onSuccess: () => void, onError: (err: string) => void) => {
+  spendingRef.doc(collectionID).collection(TABS).doc(tabID).delete().then(() => {
+    onSuccess();
+  }).catch((error) => {
+    onError(error);
+    console.error("Error removing document: ", error);
+  });
+}
 

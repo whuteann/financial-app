@@ -36,10 +36,13 @@ const ProfileScreen = () => {
   if (!userData) { return <LoadingScreen /> }
 
   return (
-    <Body>
+    <Body height="140%" variant="secondary">
+      <Section bgColor="bg-primary" padding="py-4">
+        <View style={tailwind("bg-primary")}>
+          <TextLabel text={`Lets edit your profile ;)`} textStyle={tailwind("text-20px text-secondary font-bold")} />
+        </View>
+      </Section>
       <Section>
-        <TextLabel text={`Lets edit your profile ;)`} textStyle={tailwind("text-20px font-bold")} />
-
         <Formik
           initialValues={{
             name: userData.name,
