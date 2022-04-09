@@ -31,22 +31,22 @@ const SpendingCardExamples: React.FC<props> = ({
     <View>
       <TextLabel text={"Example"} textStyle={tailwind("font-bold")} />
       <SpendingCard
-        amountSpent={lowValue ? `${Number(lowValue) - 1}` : "0"}
+        amountSpent={lowValue ? Number(lowValue) - 1 : 0}
         currencyRate={currency}
         description={goodExample}
         threshold="good"
       />
       <SpendingCard
-        amountSpent={lowValue ? lowValue : "0"}
+        amountSpent={lowValue ? Number(lowValue) : 0}
         currencyRate={currency}
         description={cautionExample}
-        threshold="low"
+        threshold="caution"
       />
       <SpendingCard
-        amountSpent={highValue ? highValue : "0"}
+        amountSpent={highValue ? Number(highValue) : 0}
         currencyRate={currency}
         description={dangerExample}
-        threshold="high"
+        threshold="danger"
       />
     </View>
   )

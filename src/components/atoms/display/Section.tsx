@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { RefreshControl, View } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 
 interface SectionProps {
@@ -11,7 +11,7 @@ interface SectionProps {
 }
 
 const Section: React.FC<SectionProps> = ({
-  children, padding = "", bgColor = "", width = "", margin = ""
+  children, padding = "", bgColor = "", width = "", margin = "",
 }) => {
 
   const tailwind = useTailwind();

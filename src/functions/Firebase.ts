@@ -3,7 +3,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
 import "firebase/functions";
-import { USERS } from "../constants/Firebase";
+import { SPENDINGS, USERS } from "../constants/Firebase";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBxajaBO7C7LRaIUTw3XEH-5tMZz4dzr5Q",
@@ -39,3 +39,4 @@ if (firebase.app.length === 0) {
 
 // db ref
 export const userRef = firestore.collection(USERS);
+export const spendingRef = firestore.collection(SPENDINGS);

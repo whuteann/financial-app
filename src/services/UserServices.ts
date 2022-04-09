@@ -36,3 +36,15 @@ export const createUser = (data: { name: string, email: string, password: string
     });
 }
 
+export const updateUser = (uid: string, data: { name: string, currency: string, caution_thres: number, danger_thres: number }, onSuccess: () => void, onError: (error: string) => void) => {
+
+  userRef.doc(uid).set(
+    data,
+    { merge: true }
+  ).then(() => {
+    onSuccess()
+  }).catch((error) => {
+    onError(error);
+  })
+}
+

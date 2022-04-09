@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { useState } from "react";
-import { View } from "react-native";
+import { Image, View } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
 import RegularButton from "../../components/atoms/buttons/RegularButton";
 import Body from "../../components/atoms/display/Body";
@@ -49,11 +49,17 @@ const LoginScreen = ({ navigation }: AuthNavigationProps<"Login">) => {
         { 'height': height }  // This is not good as it blocks the screen from scrolling on app but no alternatives for now
       ]}>
         <View>
-          <TextLabel text={`Welcome!`} textStyle={tailwind("text-20px font-bold")} />
-          <TextLabel text={` Let's log you in! :)`} textStyle={tailwind("text-20px font-bold")} />
-          <View style={tailwind("border mb-5 mt-2 w-1/2 ")} />
-
-          <View style={tailwind("mt-6")} />
+          <View style={tailwind("items-center mb-10 flex-row justify-center")}>
+            <Image
+              style={{ height: 100, width: 100 }}
+              source={require("../../../assets/Logo5.png")}
+            />
+            <View style={tailwind("pt-5 ml-5")}>
+              <TextLabel text={`Welcome!`} textStyle={tailwind("text-20px font-bold")} />
+              <TextLabel text={` Let's log you in! :)`} textStyle={tailwind("text-20px font-bold")} />
+              <View style={tailwind("border mb-5 mt-2 w-1/2 ")} />
+            </View>
+          </View>
 
           <Formik
             initialValues={{
