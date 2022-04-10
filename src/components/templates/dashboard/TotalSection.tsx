@@ -12,7 +12,14 @@ import { SpendingTab } from "../../../types/SpendingList";
 import Section from "../../atoms/display/Section";
 import TextLabel from "../../atoms/typography/TextLabel";
 
-const TotalSection = () => {
+interface sectionProps {
+  greetingMsg: string,
+  name: string,
+}
+
+const TotalSection: React.FC<sectionProps> = ({
+  greetingMsg,name
+}) => {
 
   const tailwind = useTailwind();
   const user = useSelector(UserSelector);
@@ -39,8 +46,10 @@ const TotalSection = () => {
   })
 
   return (
-    <Section bgColor="bg-primary" padding="py-4" margin="my-4">
+    <Section bgColor="bg-primary" padding="py-4" margin="mb-4">
       <View>
+        <TextLabel text={`${greetingMsg},`} textStyle={tailwind("text-20px font-bold")} color={"text-highlight"}/>
+        <TextLabel text={`${name}!`} textStyle={tailwind("text-20px font-bold")} color={"text-highlight"}/>
         <TextLabel text={`This month's total (${numToMonth(moment().toDate().getMonth())}): `} color={"text-secondary"} textStyle={tailwind("text-20px font-bold")} />
         <TextLabel text={`${user.currency} ${total}`} color={"text-secondary"} textStyle={tailwind("text-20px font-bold")} />
       </View>

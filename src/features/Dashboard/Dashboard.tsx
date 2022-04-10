@@ -36,23 +36,24 @@ const Dashboard = () => {
     }
   }, [])
 
-  return (
-    <Body height="280%">
-      <Section>
-        <TextLabel text={`${greetingMsg},`} textStyle={tailwind("text-20px font-bold")} />
-        <TextLabel text={`${name}!`} textStyle={tailwind("text-20px font-bold")} />
-        <TextLabel text={`What did you spend on? How much?`} />
+  if (!greetingMsg || !name) return <LoadingScreen />
 
+  return (
+    <Body height="500%" variant="secondary">
+      <TotalSection greetingMsg={greetingMsg} name={name} />
+
+      <Section>
+        <TextLabel text={`What did you spend on? How much?`} />
         <AddSpendingSection />
       </Section>
 
-      <TotalSection />
-
+      <View style={tailwind("mb-5")} />
       <Section>
         <View>
           <RecentSpendingsSection />
         </View>
       </Section>
+      <View style={tailwind("h-5")} />
     </Body>
   )
 }

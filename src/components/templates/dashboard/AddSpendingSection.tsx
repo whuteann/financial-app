@@ -33,7 +33,6 @@ const AddSpendingSection = () => {
       }}
       onSubmit={(values, { resetForm }) => {
         setLoading(true);
-        console.log(values)
         createSpendingTab(user.id, values, (docID) => {
           resetForm();
           revalidateCollection(`${SPENDINGS}/${docID}/${TABS}`);
@@ -47,7 +46,7 @@ const AddSpendingSection = () => {
       validationSchema={formSchema}
     >
       {({ errors, touched, values, handleSubmit, setFieldValue }) => (
-        <View style={tailwind("mt-5")}>
+        <View style={tailwind("mt-2")}>
           <TextInputField
             placeholder="A short description... "
             value={values.description}

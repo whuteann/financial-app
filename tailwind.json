@@ -85,6 +85,16 @@
 			"marginTop": 20
 		}
 	},
+	"mt-2": {
+		"style": {
+			"marginTop": 8
+		}
+	},
+	"mt-12": {
+		"style": {
+			"marginTop": 48
+		}
+	},
 	"mb-10": {
 		"style": {
 			"marginBottom": 40
@@ -93,11 +103,6 @@
 	"ml-5": {
 		"style": {
 			"marginLeft": 20
-		}
-	},
-	"mt-2": {
-		"style": {
-			"marginTop": 8
 		}
 	},
 	"mt-10": {
@@ -115,9 +120,29 @@
 			"marginTop": 30
 		}
 	},
-	"mt-14": {
+	"mt-8": {
 		"style": {
-			"marginTop": 56
+			"marginTop": 32
+		}
+	},
+	"mt-7": {
+		"style": {
+			"marginTop": 28
+		}
+	},
+	"mt-9": {
+		"style": {
+			"marginTop": 36
+		}
+	},
+	"mb-2": {
+		"style": {
+			"marginBottom": 8
+		}
+	},
+	"mb-4": {
+		"style": {
+			"marginBottom": 16
 		}
 	},
 	"flex": {
@@ -138,6 +163,11 @@
 	"h-16": {
 		"style": {
 			"height": 64
+		}
+	},
+	"h-5": {
+		"style": {
+			"height": 20
 		}
 	},
 	"w-full": {

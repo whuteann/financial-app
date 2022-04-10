@@ -22,12 +22,16 @@ const LoginScreen = ({ navigation }: AuthNavigationProps<"Login">) => {
   const tailwind = useTailwind();
   const { height } = getWindow();
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onLogin = (values: { email: string, password: string }) => {
+    setLoading(true);
     const { email, password } = values;
     login(email, password, () => {
+      setLoading(false);
       //handle buth Auth state
     }, (err: any) => {
+      setLoading(false);
       switch (err.code) {
         case "auth/wrong-password":
           setError("Wrong username or password :'(");
@@ -96,7 +100,11 @@ const LoginScreen = ({ navigation }: AuthNavigationProps<"Login">) => {
                     null
                 }
                 <View style={tailwind("mt-10")} />
-                <RegularButton label="Login!" onPress={() => { handleSubmit() }} />
+                <RegularButton
+                  label="Login!"
+                  loading={loading}
+                  onPress={() => { handleSubmit() }}
+                />
 
                 <View style={tailwind("w-[80%] flex-wrap")}>
                   <LinkText text="Don't have an account? Sign up!!" onPress={() => { navigation.navigate("SignUp") }} />
