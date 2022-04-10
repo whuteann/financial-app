@@ -59,6 +59,7 @@ const SpendingCard: React.FC<cardProps> = ({
     onCancel={() => setPressed(false)}
     visible={modalVisible}
     setModal={setModalVisible}
+    buttonText="Yea"
   />
 
   return (

@@ -1,6 +1,7 @@
 import Validate from "validate.js";
 import { auth, userRef } from "../functions/Firebase"
 import { User } from "../types/User"
+import { reauthenticateUser } from "./AuthServices";
 
 export const getUserDetail = (uid: string, onSuccess: (user: User) => void, onError: () => void) => {
   userRef.doc(uid)
@@ -48,3 +49,24 @@ export const updateUser = (uid: string, data: { name: string, currency: string, 
   })
 }
 
+export const changePassword = (data: { currentPassword: string, newPassword: string, confirmPassword: string }, onSuccess: () => void, onError: (err: string) => void) => {
+  const { currentPassword, newPassword } = data;
+
+  reauthenticateUser(currentPassword)?.
+    then(
+      data => {
+        console.log(data)
+
+        if (typeof (auth.currentUser?.uid) != "undefined") {
+          auth.currentUser.updatePassword(newPassword).then(() => {
+            onSuccess();
+          }).catch(error => onError(error));
+        }
+      }
+    )
+    .catch(
+      err => {
+        onError(err.message);
+      }
+    );
+}
