@@ -5,7 +5,7 @@ import ProfileScreen from '../features/Profile/ProfileScreen';
 import BottomTab from '../components/molecules/buttons/BottomTab';
 import { CalendarIcon, HomeIcon, ProfileIcon } from '../../assets/SVG/SVG';
 import { useTailwind } from 'tailwind-rn/dist';
-import MonthIndexScreen from '../features/Listing/MonthIndexScreen';
+import IndexStackNavigation from './IndexStackNavigation';
 const Tab = createBottomTabNavigator();
 
 
@@ -19,7 +19,6 @@ const TabNavigation = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: [{
-          position: "absolute",
           height: 70,
         }, tailwind("bg-highlight")]
       }}
@@ -35,7 +34,7 @@ const TabNavigation = () => {
         )
       }} />
 
-      <Tab.Screen name="Month" component={MonthIndexScreen} options={{
+      <Tab.Screen name="Month" component={IndexStackNavigation} options={{
         tabBarIcon: ({ focused }) => (
           <BottomTab label='Summary' icon={<CalendarIcon height={20} width={20} />} />
         )

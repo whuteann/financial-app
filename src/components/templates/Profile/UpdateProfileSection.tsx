@@ -38,8 +38,8 @@ const UpdateProfileSection: React.FC<updateProfileProps> = ({
       initialValues={{
         name: userData.name,
         currency: userData.currency || CURRENCIES[0],
-        caution_thres: userData.caution_thres.toString(),
-        danger_thres: userData.danger_thres.toString(),
+        caution_thres: userData.caution_thres ? userData.caution_thres.toString() : "",
+        danger_thres: userData.danger_thres ? userData.danger_thres.toString() : "",
       }}
       onSubmit={values => {
         const { name, currency, caution_thres, danger_thres } = values;

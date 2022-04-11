@@ -1,7 +1,6 @@
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
 import { useTailwind } from "tailwind-rn/dist";
-import Body from "../../components/atoms/display/Body";
 import TextLabel from "../../components/atoms/typography/TextLabel";
 
 type loadingProps = {

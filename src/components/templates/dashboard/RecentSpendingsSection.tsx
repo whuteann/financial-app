@@ -27,31 +27,37 @@ const RecentSpendingsSection = () => {
     listen: true,
   })
 
-  const { data: tabs } = useCollection<SpendingTab>(`${SPENDINGS}/${month ? month[0].id : ""}/${TABS}`, {
+  const { data: tabs } = useCollection<SpendingTab>(`${SPENDINGS}/${month ? (month.length == 0 ? "" : month[0].id) : ""}/${TABS}`, {
     orderBy: ["created_at", "desc"],
     limit: 4,
     listen: true,
   })
 
-  if (!month || !tabs || !user) return <LoadingSectionScreen />
+  if (!month || !user) return <LoadingSectionScreen />
+
+
   return (
     <View>
       <TextLabel text="Recent Spendings:" textStyle={tailwind("text-20px font-bold")} />
       <View style={tailwind("mt-3")}>
         {
-          tabs.map(item => {
-            return <SpendingCard
-              key={item.id}
-              tabID={item.id}
-              collectionID={month[0].id}
-              currencyRate={user.currency}
-              description={item.description}
-              amountSpent={item.amount}
-              created_date={item.created_date}
-              created_day={item.created_day}
-              threshold={getThresholdValue(item.amount, user.caution_thres, user.danger_thres)}
-            />
-          })
+          tabs
+            ?
+            tabs.map(item => {
+              return <SpendingCard
+                key={item.id}
+                tabID={item.id}
+                collectionID={month[0].id}
+                currencyRate={user.currency}
+                description={item.description}
+                amountSpent={item.amount}
+                created_date={item.created_date}
+                created_day={item.created_day}
+                threshold={getThresholdValue(item.amount, user.caution_thres, user.danger_thres)}
+              />
+            })
+            :
+            null
         }
       </View>
     </View>

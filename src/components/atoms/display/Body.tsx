@@ -7,29 +7,38 @@ import { useTailwind } from "tailwind-rn/dist";
 
 interface bodyProps {
   children: React.ReactNode,
-  variant?: "primary" | "secondary",
-  height?: string,
+  topSpace?: boolean,
+  bottomSpace?: boolean,
 }
 
 const Body: React.FC<bodyProps> = ({
-  children, variant = "primary", height = "300%"
+  children, topSpace = true, bottomSpace = true,
 }) => {
 
   const tailwind = useTailwind();
 
   return (
-    <SafeAreaView style={{ height: `${height ? height : "300%"}` }}>
-      <KeyboardAwareScrollView
-        nestedScrollEnabled={true}
-        keyboardShouldPersistTaps="always"
-        style={{ height: `${height ? height : "300%"}` }}
-      >
-        <View style={[{height: `${height ? height : "300%"}`}, tailwind(`bg-secondary items-center ${variant == "primary" ? "pt-7" : ""}`)]}>
-          <View style={tailwind(" w-full mb-5")}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={[
+        tailwind('flex flex-grow bg-secondary h-full'),
+        topSpace ? tailwind("pt-5") : null,
+      ]}>
+        <KeyboardAwareScrollView
+          nestedScrollEnabled={true}
+          keyboardShouldPersistTaps="always" >
+          <View style={[tailwind('w-full mx-auto mb-5'),]}>
             {children}
+            {
+              bottomSpace
+                ?
+                <View style={tailwind("h-16")} />
+                :
+                null
+            }
+
           </View>
-        </View>
-      </KeyboardAwareScrollView>
+        </KeyboardAwareScrollView>
+      </View>
     </SafeAreaView>
   )
 }

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { useSelector } from "react-redux";
 import { useTailwind } from "tailwind-rn/dist";
-import RegularButton from "../../components/atoms/buttons/RegularButton";
 import Body from "../../components/atoms/display/Body";
 import Section from "../../components/atoms/display/Section";
 
@@ -39,9 +38,8 @@ const Dashboard = () => {
   if (!greetingMsg || !name) return <LoadingScreen />
 
   return (
-    <Body height="500%" variant="secondary">
+    <Body topSpace={false}> 
       <TotalSection greetingMsg={greetingMsg} name={name} />
-
       <Section>
         <TextLabel text={`What did you spend on? How much?`} />
         <AddSpendingSection />
