@@ -10,7 +10,6 @@ const Stack = createStackNavigator();
 
 const AuthNavigation = () => {
 
-  const tailwind = useTailwind();
   return (
     <Stack.Navigator
       initialRouteName="Login"

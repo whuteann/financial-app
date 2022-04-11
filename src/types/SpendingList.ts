@@ -10,4 +10,5 @@ export type SpendingList = {
   user_id: string,
   month: string,
   year: number,
+  amount: number,
 }

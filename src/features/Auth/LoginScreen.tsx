@@ -47,7 +47,7 @@ const LoginScreen = ({ navigation }: AuthNavigationProps<"Login">) => {
   }
 
   return (
-    <Body variant="secondary">
+    <Body topSpace={false} bottomSpace={false}>
       <View style={[
         tailwind('items-center flex flex-row justify-center w-full'),
         { 'height': height }  // This is not good as it blocks the screen from scrolling on app but no alternatives for now

@@ -9,18 +9,22 @@ interface cardProps {
   year: string,
   total: string,
   currencyRate: string,
+  onPress: () => void;
 }
 
 const MonthCard: React.FC<cardProps> = ({
-  month, year, total, currencyRate
+  month, year, total, currencyRate, onPress
 }) => {
   const tailwind = useTailwind();
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress}>
       <View style={tailwind("box-card-shadow bg-white h-16 px-4 py-2 mb-3 flex-row  ")}>
         <View style={tailwind("w-[90%]")}>
-          <TextLabel text={`${month} ${year}`} textStyle={tailwind("text-16px font-bold")} />
+          <View style={tailwind("flex-row")}>
+            <TextLabel text={`${month}`} textStyle={tailwind("text-16px font-bold")} />
+            <TextLabel text={`${year}`} textStyle={tailwind("text-16px ml-1 font-bold")} />
+          </View>
           <TextLabel text={`Total spent: ${currencyRate}${total}`} textStyle={tailwind("text-12px")} />
         </View>
         <View style={tailwind("pt-3")}>

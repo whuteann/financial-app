@@ -11,10 +11,11 @@ import { createSpendingTab } from "../../../services/SpendingServices";
 import LoadingScreen from "../../../features/Loading/LoadingScreen";
 import { revalidateCollection } from "@nandorojo/swr-firestore";
 import { SPENDINGS, TABS } from "../../../constants/Firebase";
+import TextLabel from "../../atoms/typography/TextLabel";
 
 const formSchema = Yup.object().shape({
   description: Yup.string().max(30, "Your description is too long!").required("Required"),
-  amount: Yup.string().required("Required")
+  amount: Yup.string().max(10, "Too large of a value! >.<").required("Required")
 });
 
 const AddSpendingSection = () => {
@@ -22,6 +23,7 @@ const AddSpendingSection = () => {
   const user = useSelector(UserSelector);
   const tailwind = useTailwind();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   if (!user) return <LoadingScreen />
 
@@ -33,14 +35,20 @@ const AddSpendingSection = () => {
       }}
       onSubmit={(values, { resetForm }) => {
         setLoading(true);
-        createSpendingTab(user.id, values, (docID) => {
-          resetForm();
-          revalidateCollection(`${SPENDINGS}/${docID}/${TABS}`);
+        if (Number(values.amount) < 0) {
+          setError("Please enter a positive integer :')")
           setLoading(false);
-        }, () => {
-          resetForm();
-          setLoading(false);
-        })
+        } else {
+          createSpendingTab(user.id, values, (docID) => {
+            resetForm();
+            revalidateCollection(`${SPENDINGS}/${docID}/${TABS}`);
+            setLoading(false);
+          }, (error) => {
+            resetForm();
+            setError(error);
+            setLoading(false);
+          })
+        }
       }}
       enableReinitialize={true}
       validationSchema={formSchema}
@@ -62,7 +70,13 @@ const AddSpendingSection = () => {
             hasError={errors.amount && touched.amount ? true : false}
             errorMessage={errors.amount}
           />
-
+          {
+            error
+              ?
+              <TextLabel text={error} textStyle={tailwind("text-red-500 ml-2")} />
+              :
+              null
+          }
           <RegularButton
             label="Add!"
             onPress={() => { handleSubmit(); }}

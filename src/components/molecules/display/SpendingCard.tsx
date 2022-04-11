@@ -46,7 +46,7 @@ const SpendingCard: React.FC<cardProps> = ({
   });
 
   const deleteItem = () => [
-    deleteSpendingCard(collectionID, tabID, () => {
+    deleteSpendingCard(collectionID, tabID, amountSpent, () => {
       revalidateCollection(`${SPENDINGS}/${collectionID}/${TABS}`);
     }, () => {
 

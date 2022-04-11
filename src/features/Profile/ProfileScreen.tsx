@@ -28,7 +28,7 @@ const ProfileScreen = () => {
   if (!userData) { return <LoadingScreen /> }
 
   return (
-    <Body height="115%" variant="secondary">
+    <Body topSpace={false}>
       <Section bgColor="bg-primary" padding="py-4">
         <View style={tailwind("bg-primary")}>
           <TextLabel text={`Lets edit your profile ;)`} textStyle={tailwind("text-20px text-secondary font-bold")} />
