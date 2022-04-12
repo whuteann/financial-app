@@ -22,7 +22,7 @@ const FormTextInput: React.FC<Props> = ({
   const tailwind = useTailwind();
 
   return (
-    <View>
+    <View style={tailwind("w-full")}>
       <TextLabel text={title} />
       <TextInputField
         value={value}

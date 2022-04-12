@@ -25,7 +25,7 @@ const MonthCard: React.FC<cardProps> = ({
             <TextLabel text={`${month}`} textStyle={tailwind("text-16px font-bold")} />
             <TextLabel text={`${year}`} textStyle={tailwind("text-16px ml-1 font-bold")} />
           </View>
-          <TextLabel text={`Total spent: ${currencyRate}${total}`} textStyle={tailwind("text-12px")} />
+          <TextLabel text={`Total spent: ${currencyRate} ${total}`} textStyle={tailwind("text-12px")} />
         </View>
         <View style={tailwind("pt-3")}>
           <AngleRightIcon height={25} width={25} />

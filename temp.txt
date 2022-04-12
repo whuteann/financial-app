@@ -1,68 +1,67 @@
-import { useCollection, useDocument } from "@nandorojo/swr-firestore";
-import React from "react";
-import { View } from "react-native";
-import { useSelector } from "react-redux";
-import { useTailwind } from "tailwind-rn/dist";
-import BackButton from "../../components/atoms/buttons/BackButton";
-import Body from "../../components/atoms/display/Body";
-import Section from "../../components/atoms/display/Section";
-import TextLabel from "../../components/atoms/typography/TextLabel";
-import SpendingCard from "../../components/molecules/display/SpendingCard";
-import { SPENDINGS, TABS } from "../../constants/Firebase";
-import { getThresholdValue } from "../../helpers/Generichelper";
-import { IndexStackProps } from "../../navigation/NavigationProps/NavigationProps";
-import { UserSelector } from "../../redux/reducers/Auth";
-import { SpendingList, SpendingTab } from "../../types/SpendingList";
-import LoadingScreen from "../Loading/LoadingScreen";
+<TextLabel text={`Don't worry!`} textStyle={tailwind("text-20px font-bold")} />
+          <TextLabel text={`We'll get you all signed up :)`} textStyle={tailwind("text-20px font-bold")} />
+          <View style={tailwind("border mb-5 mt-2 w-1/2 ")} />
 
+          <View style={tailwind("mt-6")} />
 
-const SpendingIndexScreen = ({ navigation, route }: IndexStackProps<"SpendingIndex">) => {
+          <Formik
+            initialValues={{
+              name: '',
+              currency: CURRENCIES[0],
+              email: '',
+              password: '',
+            }}
+            onSubmit={values => { onSignUp(values) }}
+            validationSchema={signUpSchema}
+          >
+            {({ errors, touched, values, handleSubmit, setFieldValue }) => (
+              <View style={tailwind("items-center w-full")}>
+                <FormTextInput
+                  title="Name (So that we know who you are!)"
+                  placeholder="name..."
+                  value={values.name}
+                  onChangeValue={(value) => { setFieldValue("name", value) }}
+                  hasError={errors.name && touched.name ? true : false}
+                  errorMessage={errors.name}
+                />
+                <FormDropdownInput
+                  title="Currency Rate"
+                  value={values.currency}
+                  items={CURRENCIES}
+                  onChangeValue={(value) => { setFieldValue("currency", value) }}
+                  hasError={errors.currency && touched.currency ? true : false}
+                  errorMessage={errors.currency}
+                />
+                <FormTextInput
+                  title="Email"
+                  placeholder="email@email.com"
+                  value={values.email}
+                  onChangeValue={(value) => { setFieldValue("email", value) }}
+                  hasError={errors.email && touched.email ? true : false}
+                  errorMessage={errors.email}
+                />
+                <FormTextInput
+                  title="Password"
+                  placeholder="password..."
+                  password={true}
+                  value={values.password}
+                  onChangeValue={(value) => { setFieldValue("password", value) }}
+                  hasError={errors.password && touched.password ? true : false}
+                  errorMessage={errors.password}
+                />
+                {
+                  error
+                    ?
+                    <TextLabel text={error} textStyle={tailwind("text-red-500")} />
+                    :
+                    null
+                }
+                <View style={tailwind("mt-10")} />
+                <RegularButton label="SignUp" onPress={() => { handleSubmit() }} />
 
-  const tailwind = useTailwind();
-  const { monthID } = route.params;
-  const user = useSelector(UserSelector);
-
-  const { data: monthData } = useDocument<SpendingList>(`${SPENDINGS}/${monthID}`, {
-    listen: true,
-  })
-
-  const { data: spendings } = useCollection<SpendingTab>(`${SPENDINGS}/${monthID}/${TABS}`, {
-    orderBy: ["created_at", "desc"],
-    listen: true,
-  })
-
-  if (!spendings || !user || !monthData) { return <LoadingScreen /> }
-
-  return (
-    <Body>
-
-      <Section>
-        <BackButton label="Return" onPress={() => { navigation.navigate("MonthIndex") }} />
-        <TextLabel text={`Your spendings for the month of ${monthData.month}, ${monthData.year}`} textStyle={tailwind("text-20px font-bold")} />
-        <View style={tailwind("border mb-5 mt-2")} />
-        <TextLabel text={`Total Spending: `} />
-        <TextLabel text={`${user.currency} ${monthData.amount}`} textStyle={tailwind("text-20px font-bold")} />
-        <View style={tailwind("border mb-[30px] w-1/2 mt-2")} />
-      </Section>
-      <Section>
-        {
-          spendings.map(item => {
-            return <SpendingCard
-              key={item.id}
-              tabID={item.id}
-              collectionID={monthID}
-              currencyRate={user.currency}
-              description={item.description}
-              amountSpent={item.amount}
-              created_date={item.created_date}
-              created_day={item.created_day}
-              threshold={getThresholdValue(item.amount, user.caution_thres, user.danger_thres)}
-            />
-          })
-        }
-      </Section>
-    </Body>
-  )
-}
-
-export default SpendingIndexScreen;
+                <View style={tailwind("w-[90%] flex-wrap")}>
+                  <LinkText text="Already have an account? Log in!!" onPress={() => { navigation.navigate("Login") }} textStyle={tailwind("text-center")} />
+                </View>
+              </View>
+            )}
+          </Formik>
