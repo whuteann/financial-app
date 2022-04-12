@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import store from './src/redux/Store';
 import UserProvider from './src/providers/UserProvider';
 import FirebaseProvider from './src/providers/FirebaseProvider';
+import 'react-native-gesture-handler';
 
 
 const tailwindExtensions = {

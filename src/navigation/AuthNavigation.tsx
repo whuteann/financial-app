@@ -1,12 +1,8 @@
-import Dashboard from '../features/Dashboard/Dashboard';
-
-
-import { useTailwind } from 'tailwind-rn/dist';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from '../features/Auth/LoginScreen';
 import SignUpScreen from '../features/Auth/SignUpScreen';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const AuthNavigation = () => {
 

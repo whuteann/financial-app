@@ -11,6 +11,7 @@ import { AuthNavigationProps } from "../../navigation/NavigationProps/Navigation
 import * as Yup from "yup";
 import LinkText from "../../components/atoms/typography/LinkText";
 import { login } from "../../services/AuthServices";
+import Section from "../../components/atoms/display/Section";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Please enter a valid email address ").required("Required"),
@@ -48,12 +49,9 @@ const LoginScreen = ({ navigation }: AuthNavigationProps<"Login">) => {
 
   return (
     <Body topSpace={false} bottomSpace={false}>
-      <View style={[
-        tailwind('items-center flex flex-row justify-center w-full'),
-        { 'height': height }  // This is not good as it blocks the screen from scrolling on app but no alternatives for now
-      ]}>
+      <Section>
         <View>
-          <View style={tailwind("items-center mb-10 flex-row justify-center")}>
+          <View style={tailwind("items-center mb-10 flex-row justify-start pt-[40%]")}>
             <Image
               style={{ height: 100, width: 100 }}
               source={require("../../../assets/Logo5.png")}
@@ -106,14 +104,14 @@ const LoginScreen = ({ navigation }: AuthNavigationProps<"Login">) => {
                   onPress={() => { handleSubmit() }}
                 />
 
-                <View style={tailwind("w-[80%] flex-wrap")}>
+                <View style={tailwind("w-[80%] items-center")}>
                   <LinkText text="Don't have an account? Sign up!!" onPress={() => { navigation.navigate("SignUp") }} />
                 </View>
               </View>
             )}
           </Formik>
         </View>
-      </View>
+      </Section>
     </Body>
   )
 }

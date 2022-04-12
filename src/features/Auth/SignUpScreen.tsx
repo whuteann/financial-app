@@ -13,6 +13,10 @@ import LinkText from "../../components/atoms/typography/LinkText";
 import FormDropdownInput from "../../components/molecules/input/FormDropdownInput";
 import { CURRENCIES } from "../../constants/Lists";
 import { createUser } from "../../services/UserServices";
+import Section from "../../components/atoms/display/Section";
+import TotalSection from "../../components/templates/dashboard/TotalSection";
+import AddSpendingSection from "../../components/templates/dashboard/AddSpendingSection";
+import RecentSpendingsSection from "../../components/templates/dashboard/RecentSpendingsSection";
 
 const signUpSchema = Yup.object().shape({
   name: Yup.string().min(4, "Must be at least 4 characters").required("Required"),
@@ -44,12 +48,9 @@ const SignUpScreen = ({ navigation }: AuthNavigationProps<"SignUp">) => {
   }
 
   return (
-    <Body topSpace={false} bottomSpace={false}>
-      <View style={[
-        tailwind('items-center flex flex-row justify-center w-full'),
-        { 'height': height }  // This is not good as it blocks the screen from scrolling on app but no alternatives for now
-      ]}>
-        <View>
+    <Body topSpace={false}>
+      <Section>
+        <View style={tailwind('pt-[25%]')}>
           <TextLabel text={`Don't worry!`} textStyle={tailwind("text-20px font-bold")} />
           <TextLabel text={`We'll get you all signed up :)`} textStyle={tailwind("text-20px font-bold")} />
           <View style={tailwind("border mb-5 mt-2 w-1/2 ")} />
@@ -111,14 +112,14 @@ const SignUpScreen = ({ navigation }: AuthNavigationProps<"SignUp">) => {
                 <View style={tailwind("mt-10")} />
                 <RegularButton label="SignUp" onPress={() => { handleSubmit() }} />
 
-                <View style={tailwind("w-[90%] flex-wrap")}>
+                <View style={tailwind("w-[90%] items-center")}>
                   <LinkText text="Already have an account? Log in!!" onPress={() => { navigation.navigate("Login") }} textStyle={tailwind("text-center")} />
                 </View>
               </View>
             )}
           </Formik>
         </View>
-      </View>
+      </Section>
     </Body>
   )
 }

@@ -51,7 +51,6 @@ const Dashboard = () => {
           <RecentSpendingsSection />
         </View>
       </Section>
-      <View style={tailwind("h-5")} />
     </Body>
   )
 }
